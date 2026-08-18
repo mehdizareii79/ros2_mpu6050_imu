@@ -90,18 +90,29 @@ Build specific package
 colcon build --packages-select `name_of_package`
 ```
 
-## Listening to the IMU topic
+## wiring
 
-After launching ros2_mpu6050.launch.py,
+first you should allow orangePi for I2C:
 
-In the host PC or in the RPi SSH client terminal, does not matter, execute the following command
+    sudo nano /etc/default/u-boot
+    U_BOOT_FDT_OVERLAYS="device-tree/rockchip/overlay/rk3588-i2c5-m3.dtbo" (ref: https://github.com/Joshua-Riek/ubuntu-rockchip/wiki/Ubuntu-22.04-LTS)
+    #(we are using i2c5)
+    sudo u-boot-update 
+    reboot 
+    
+    #(you should see that /boot/extlinux/extlinux.conf  changes
+    sudo usermod -aG i2c $USER
+    
+    verify i2c:
+            ls /dev/i2c*
+            sudo i2cdetect -y 5
 
-```bash
-ros2 topic echo /imu/mpu6050
-```
 
-If the above command does not work, ensure that the /imu/mpu6050 topic shows when running the following command
 
-```bash
-ros2 topic list
-```
+wiring: (for i2c5)
+
+    sda -> 3
+    sck -> 5
+    vcc-> 1
+    gnd -> 6
+
