@@ -6,7 +6,7 @@
 
 void calibration()
 {
-    auto mpu6050_dev = std::make_shared<Mpu6050>();
+    auto mpu6050_dev = std::make_shared<Mpu6050>("/dev/i2c-5", 0x68);
     const int no_of_samples = 500;
 
     double gyro_x_offset {0.0};

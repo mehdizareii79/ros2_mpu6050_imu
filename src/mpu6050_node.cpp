@@ -7,7 +7,7 @@ using namespace std::chrono_literals;
 
 Mpu6050Node::Mpu6050Node(const std::string& name)
     : Node(name)
-    , mpu6050_dev_{std::make_unique<Mpu6050>()}
+    , mpu6050_dev_{std::make_unique<Mpu6050>("/dev/i2c-5", 0x68)}
 {
     // Declare parameters
     this->declare_parameter<int>("gyro_fs_sel", 0);
@@ -37,7 +37,7 @@ Mpu6050Node::Mpu6050Node(const std::string& name)
 
     publisher_ = this->create_publisher<sensor_msgs::msg::Imu>("imu/mpu6050", 10);
 
-    timer_ = this->create_wall_timer(10ms, std::bind(&Mpu6050Node::ImuPubCallback, this));
+    timer_ = this->create_wall_timer(2.5ms, std::bind(&Mpu6050Node::ImuPubCallback, this));
 }
 
 void Mpu6050Node::ImuPubCallback()

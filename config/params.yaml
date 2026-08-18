@@ -7,14 +7,14 @@ mpu6050_sensor:
     #   1    |  +- 500 deg/s
     #   2    |  +- 1000 deg/s
     #   3    |  +- 2000 deg/s
-    gyro_fs_sel: 0
+    gyro_fs_sel: 2
     #FS_SEL  |  Full Scale Range
     #        |
     #   0    |  +- 2 g
     #   1    |  +- 4 g
     #   2    |  +- 8 g
     #   3    |  +- 16 g
-    accel_afs_sel: 0
+    accel_afs_sel: 2
     #DLPF_CFG  |  Accelerometer    |            Gyroscope
     #          |    (Fs=1khz)      |
     #          |    Bandwidth(Hz)  |     Bandwidth(Hz)   |      Fs(khz)
